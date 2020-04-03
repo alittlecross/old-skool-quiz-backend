@@ -1,0 +1,23 @@
+{
+  "name": "old-skool-quiz-backend",
+  "version": "1.0.0",
+  "description": "The backend for a pet project created to hold Friday afternoon quizzes during lock-down.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alittlecross/old-skool-quiz-backend.git"
+  },
+  "author": "alittlecross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alittlecross/old-skool-quiz-backend/issues"
+  },
+  "homepage": "https://github.com/alittlecross/old-skool-quiz-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
