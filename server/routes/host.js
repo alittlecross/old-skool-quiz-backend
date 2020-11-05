@@ -1,5 +1,3 @@
-const updateGame = require('../services/update-game')
-
 module.exports = (req, res) => {
   const { cookie, gamecode, id } = req.body
 
@@ -22,13 +20,13 @@ module.exports = (req, res) => {
       game.host.name = game.players[id].name
       game.players[id].visible = false
 
-      const io = req.app.get('io')
-
       res.status(200).json({
         game
       })
 
-      updateGame(game, gamecode, io)
+      const io = req.app.get('io')
+
+      io.of(gamecode).emit('update game', game)
     }
   }
 }

@@ -1,8 +1,6 @@
 const Answer = require('../lib/answer')
 const Player = require('../lib/player')
 
-const updateGame = require('../services/update-game')
-
 module.exports = (req, res) => {
   const games = req.app.get('games')
 
@@ -31,17 +29,17 @@ module.exports = (req, res) => {
 
     for (let i = player.answers.length; i < game.questions.length; i++) {
       if (game.questions[i].showAnswer) {
-        player.answers.push(new Answer('-', false))
+        player.answers.push(new Answer('-'))
       }
     }
-
-    const io = req.app.get('io')
-
-    updateGame(game, gamecode, io)
 
     res.status(200).json({
       game,
       id
     })
+
+    const io = req.app.get('io')
+
+    io.of(gamecode).emit('update game', game)
   }
 }

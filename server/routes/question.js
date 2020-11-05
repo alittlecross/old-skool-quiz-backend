@@ -1,6 +1,6 @@
 const Question = require('../lib/question')
 
-const updateGame = require('../services/update-game')
+const countdown = require('../services/countdown')
 
 module.exports = (req, res, next) => {
   const { answer, cookie, gamecode, picture, question, seconds } = req.body
@@ -31,13 +31,13 @@ module.exports = (req, res, next) => {
         ))
         game.seconds = +seconds
 
-        const io = req.app.get('io')
-
         res.status(200).json({
           game
         })
 
-        updateGame(game, gamecode, io)
+        const io = req.app.get('io')
+
+        countdown(game, gamecode, io)
       } else {
         res.status(304)
       }
