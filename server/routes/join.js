@@ -31,7 +31,7 @@ module.exports = (req, res) => {
 
     for (let i = player.answers.length; i < game.questions.length; i++) {
       if (game.questions[i].showAnswer) {
-        player.answers.push(new Answer('-', false))
+        player.answers.push(new Answer('-'))
       }
     }
 

@@ -28,7 +28,7 @@ module.exports = (game, gamecode, io) => {
 
         for (const id in game.players) {
           if (game.players[id].answers.length <= i) {
-            game.players[id].answers[i] = new Answer('-', false)
+            game.players[id].answers[i] = new Answer('-')
           } else {
             game.players[id].answers[i].visible = true
           }

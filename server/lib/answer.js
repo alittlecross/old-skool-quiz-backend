@@ -1,7 +1,7 @@
 class Answer {
-  constructor (answer, correct, visible = true) {
+  constructor (answer, visible = true) {
     this.answer = answer
-    this.correct = correct
+    this.points = 0
     this.visible = visible
   }
 }

@@ -4,24 +4,15 @@ module.exports = (game, namespace, socket) => {
   socket.on('add answer', (answer, id) => {
     const i = game.questions.length - 1
 
-    game.players[id].answers[i] = new Answer(answer, false, !game.counting)
+    game.players[id].answers[i] = new Answer(answer, !game.counting)
 
     namespace.emit('update game', game)
   })
 
-  socket.on('add/remove bonus points', (id, points) => {
-    game.players[id].points += points
+  socket.on('add/remove points', (i, id, points) => {
+    game.players[id].answers[i].points += points
 
     namespace.emit('update game', game)
-  })
-
-  socket.on('add/remove points', (bool, i, id) => {
-    if (game.players[id].answers[i]) {
-      game.players[id].answers[i].correct = bool
-      game.players[id].points += bool ? 1 : -1
-
-      namespace.emit('update game', game)
-    }
   })
 
   socket.on('end countdown', _ => {
@@ -34,11 +25,9 @@ module.exports = (game, namespace, socket) => {
     game.players[players[1]].answers.forEach((answer, i) => {
       if (answer.answer === '-') {
         game.players[players[1]].answers[i].answer = game.players[players[0]].answers[i].answer
-        game.players[players[1]].answers[i].correct = game.players[players[0]].answers[i].correct
+        game.players[players[1]].answers[i].points = game.players[players[0]].answers[i].points
       }
     })
-
-    game.players[players[1]].points += game.players[players[0]].points
 
     delete game.players[players[0]]
 

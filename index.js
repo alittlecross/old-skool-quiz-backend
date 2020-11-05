@@ -7,7 +7,7 @@ const { create, host, index, join, question } = require('./server/routes')
 
 const app = express()
 const games = {}
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const server = http.createServer(app)
 
 const io = socket(server)
