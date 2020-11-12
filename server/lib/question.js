@@ -1,9 +1,9 @@
 class Question {
-  constructor (answer, picture, question, showAnswer) {
+  constructor (answer, correct, picture, question) {
     this.answer = answer
+    this.correct = correct
     this.picture = picture
     this.question = question
-    this.showAnswer = showAnswer
   }
 }
 

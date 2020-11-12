@@ -15,22 +15,15 @@ module.exports = (game, gamecode, io) => {
     } else {
       clearInterval(countdown)
 
-      game.counting = false
-
-      for (const question of game.questions) {
-        question.showAnswer = true
-      }
-
+      game.questions.push(game.active)
+      game.active = null
       game.seconds = seconds
 
-      const i = game.questions.length - 1
-
       for (const id in game.players) {
-        if (game.players[id].answers.length <= i) {
-          game.players[id].answers[i] = new Answer('-')
-        } else {
-          game.players[id].answers[i].visible = true
-        }
+        if (!game.players[id].active) game.players[id].active = new Answer('-')
+
+        game.players[id].answers.push(game.players[id].active)
+        game.players[id].active = null
       }
 
       io.of(gamecode).emit('update game', game)

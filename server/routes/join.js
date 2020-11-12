@@ -28,9 +28,7 @@ module.exports = (req, res) => {
     const player = game.players[id]
 
     for (let i = player.answers.length; i < game.questions.length; i++) {
-      if (game.questions[i].showAnswer) {
-        player.answers.push(new Answer('-'))
-      }
+      player.answers.push(new Answer('-'))
     }
 
     res.status(200).json({

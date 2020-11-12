@@ -3,7 +3,7 @@ const Question = require('../lib/question')
 const countdown = require('../services/countdown')
 
 module.exports = (req, res, next) => {
-  const { answer, cookie, gamecode, picture, question, seconds } = req.body
+  const { answer, cookie, correct, gamecode, picture, question, seconds } = req.body
 
   const games = req.app.get('games')
 
@@ -22,13 +22,12 @@ module.exports = (req, res, next) => {
       const { counting } = game
 
       if (!counting && youAreHost) {
-        game.counting = true
-        game.questions.push(new Question(
+        game.active = new Question(
           answer,
+          correct,
           picture,
-          question,
-          false
-        ))
+          question
+        )
         game.seconds = +seconds
 
         res.status(200).json({
