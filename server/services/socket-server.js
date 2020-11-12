@@ -2,9 +2,7 @@ const Answer = require('../lib/answer')
 
 module.exports = (game, namespace, socket) => {
   socket.on('add answer', (answer, id) => {
-    const i = game.questions.length - 1
-
-    game.players[id].answers[i] = new Answer(answer, !game.counting)
+    game.players[id].active = new Answer(answer)
 
     namespace.emit('update game', game)
   })

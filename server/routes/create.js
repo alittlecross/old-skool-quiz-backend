@@ -3,6 +3,8 @@ const Game = require('../lib/game')
 const generator = require('../utils/generator')
 
 module.exports = (req, res) => {
+  console.log('POST /create')
+
   const games = req.app.get('games')
 
   let gamecode
@@ -22,6 +24,11 @@ module.exports = (req, res) => {
 
   namespace.on('connection', socket => require('../services/socket-server')(game, namespace, socket))
 
+  console.log('Name: ' + name)
+  console.log('Gamecode: ' + gamecode)
+  console.log('Password: ' + password)
+
+  console.log('Line 31')
   res.status(200).json({
     gamecode,
     password
